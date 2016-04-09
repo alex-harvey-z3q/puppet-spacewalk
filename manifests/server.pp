@@ -39,8 +39,9 @@ class spacewalk::server (
   }
 
   exec { 'spacewalk-setup':
-    command     => "/usr/bin/spacewalk-setup --disconnected --answer-file=$answer_file",
-    creates     => '/usr/share/spacewalk',
+    command     => "/usr/bin/spacewalk-setup --disconnected --answer-file=/etc/sysconfig/spacewalk.answers",
+    creates   => '/var/www/html/pub/RHN-ORG-TRUSTED-SSL-CERT',
+    logoutput => true,
     refreshonly => true,
   }
 
