@@ -11,7 +11,7 @@ RSpec.configure do |c|
   c.before :suite do
     hosts.each do |host|
       copy_module_to(host, :source => proj_root, :module_name => 'spacewalk')
-      on host, puppet('module install puppetlabs-stdlib'), {:acceptable_exit_codes => [0,1]}
+      on host, puppet('module install puppetlabs-stdlib'), {:acceptable_exit_codes => [0]}
     end
   end
 end
