@@ -1,22 +1,26 @@
 require 'spec_helper_acceptance'
 
-describe 'configuring spacewalk' do
-  context 'puppet apply' do
-    it 'should apply and be idempotent' do
-      pp = <<-EOS
+describe 'spacewalk::server' do
+  let(:manifest) {
+    <<-EOS
 include spacewalk::server
 EOS
-      apply_manifest pp, :catch_failures => true
-      expect(apply_manifest(pp, :catch_failures => true).exit_code).to be_zero
-    end
+  }
+
+  it 'should apply without errors' do
+    apply_manifest(manifest, :catch_failures => true)
   end
 
-  context 'ports' do
-    describe port('80') do
-      it { should be_listening }
-    end
-    describe port('443') do
-      it { should be_listening }
-    end
+  it 'should apply a second time without changes' do
+    @result = apply_manifest(manifest)
+    expect(@result.exit_code).to be_zero
+  end
+
+  describe port('80') do
+    it { is_expected.to be_listening }
+  end
+
+  describe port('443') do
+    it { is_expected.to be_listening }
   end
 end
