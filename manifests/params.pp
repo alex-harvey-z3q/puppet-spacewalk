@@ -22,6 +22,7 @@ class spacewalk::params {
   $ssl_password        = 'spacewalk'
   $ssl_set_email       = 'root@localhost'
   $ssl_config_sslvhost = 'Y'
+  $db_password         = 'spacewalk'
 
   $yumrepos = {
     'spacewalk' => {
