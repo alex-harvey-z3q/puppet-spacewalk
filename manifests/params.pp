@@ -26,7 +26,6 @@ class spacewalk::params {
 
   $yumrepos = {
     'spacewalk' => {
-      ensure   => 'present',
       baseurl  => "http://yum.spacewalkproject.org/2.4/RHEL/${::operatingsystemmajrelease}/\$basearch/",
       descr    => 'Spacewalk',
       enabled  => '1',
@@ -34,7 +33,6 @@ class spacewalk::params {
       gpgkey   => 'http://yum.spacewalkproject.org/RPM-GPG-KEY-spacewalk-2015',
     },
     'spacewalk-nightly' => {
-      ensure   => 'present',
       baseurl  => "http://yum.spacewalkproject.org/nightly/RHEL/${::operatingsystemmajrelease}/\$basearch/",
       descr    => 'Spacewalk nightly',
       enabled  => '0',
@@ -42,7 +40,6 @@ class spacewalk::params {
       gpgkey   => 'http://yum.spacewalkproject.org/RPM-GPG-KEY-spacewalk-2015',
     },
     'spacewalk-source' => {
-      ensure   => 'present',
       baseurl  => "http://yum.spacewalkproject.org/2.4/RHEL/${::operatingsystemmajrelease}/source/",
       descr    => 'Spacewalk SRPMS',
       enabled  => '0',
@@ -50,7 +47,6 @@ class spacewalk::params {
       gpgkey   => 'http://yum.spacewalkproject.org/RPM-GPG-KEY-spacewalk-2015',
     },
     'jpackage-generic' => {
-      ensure     => 'present',
       descr      => 'JPackage generic',
       enabled    => '1',
       gpgcheck   => '1',
@@ -58,7 +54,6 @@ class spacewalk::params {
       mirrorlist => 'http://www.jpackage.org/mirrorlist.php?dist=generic&type=free&release=5.0',
     },
     'epel' => {
-      ensure         => 'present',
       descr          => "Extra Packages for Enterprise Linux ${::operatingsystemmajrelease} - \$basearch",
       enabled        => '1',
       failovermethod => 'priority',
@@ -67,7 +62,6 @@ class spacewalk::params {
       mirrorlist     => 'https://mirrors.fedoraproject.org/metalink?repo=epel-7&arch=$basearch',
     },
     'epel-debuginfo' => {
-      ensure         => 'present',
       descr          => "Extra Packages for Enterprise Linux ${::operatingsystemmajrelease} - \$basearch - Debug",
       enabled        => '0',
       failovermethod => 'priority',
@@ -76,7 +70,6 @@ class spacewalk::params {
       mirrorlist     => 'https://mirrors.fedoraproject.org/metalink?repo=epel-debug-7&arch=$basearch',
     },
     'epel-source' => {
-      ensure         => 'present',
       descr          => "Extra Packages for Enterprise Linux ${::operatingsystemmajrelease} - \$basearch - Source",
       enabled        => '0',
       failovermethod => 'priority',
@@ -85,7 +78,6 @@ class spacewalk::params {
       mirrorlist     => 'https://mirrors.fedoraproject.org/metalink?repo=epel-source-7&arch=$basearch',
     },
     'epel-testing' => {
-      ensure         => 'present',
       descr          => "Extra Packages for Enterprise Linux ${::operatingsystemmajrelease} - Testing - \$basearch",
       enabled        => '0',
       failovermethod => 'priority',
@@ -94,7 +86,6 @@ class spacewalk::params {
       mirrorlist     => 'https://mirrors.fedoraproject.org/metalink?repo=testing-epel7&arch=$basearch',
     },
     'epel-testing-debuginfo' => {
-      ensure         => 'present',
       descr          => "Extra Packages for Enterprise Linux ${::operatingsystemmajrelease} - Testing - \$basearch - Debug",
       enabled        => '0',
       failovermethod => 'priority',
@@ -103,7 +94,6 @@ class spacewalk::params {
       mirrorlist     => 'https://mirrors.fedoraproject.org/metalink?repo=testing-debug-epel7&arch=$basearch',
     },
     'epel-testing-source' => {
-      ensure         => 'present',
       descr          => "Extra Packages for Enterprise Linux ${::operatingsystemmajrelease} - Testing - \$basearch - Source",
       enabled        => '0',
       failovermethod => 'priority',
