@@ -1,5 +1,7 @@
 # spacewalk
 
+[![Build Status](https://img.shields.io/travis/alexharv074/puppet-spacewalk.svg)](https://travis-ci.org/alexharv074/puppet-spacewalk)
+
 ##Development
 
 Please read CONTRIBUTING.md before contributing.
