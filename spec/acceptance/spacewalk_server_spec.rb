@@ -3,7 +3,9 @@ require 'spec_helper_acceptance'
 describe 'spacewalk::server' do
   let(:manifest) {
     <<-EOS
-include spacewalk::server
+class { 'spacewalk::server':
+  manage_repos => true,
+}
 EOS
   }
 

@@ -1,6 +1,7 @@
 class spacewalk::server (
-  $manage_repo         = $spacewalk::params::manage_repo,
+  $manage_repos        = $spacewalk::params::manage_repos,
   $repo_stage          = $spacewalk::params::repo_stage,
+  $db_backend          = $spacewalk::params::db_backend,
   $package_list        = $spacewalk::params::package_list,
   $admin_email         = $spacewalk::params::admin_email,
   $ssl_set_org         = $spacewalk::params::ssl_set_org,
@@ -13,56 +14,25 @@ class spacewalk::server (
   $db_password         = $spacewalk::params::db_password,
 ) inherits spacewalk::params {
 
-  validate_bool($manage_repo)
-  if ($manage_repo) {
+  validate_bool($manage_repos)
+  if ($manage_repos) {
     if !(defined(Stage[$repo_stage])) {
       stage { $repo_stage: before => Stage['main'] }
     }
 
-    class { 'spacewalk::repos':
+    class { 'spacewalk::server::repos':
       stage => $repo_stage,
     }
   }
-
   validate_array($package_list)
-  package { $package_list:
-    ensure => installed,
-  }
 
-  file { '/etc/sysconfig':
-    ensure => directory,
-  }
+  include spacewalk::server::packages
+  include spacewalk::server::setup
+  include spacewalk::server::service
 
-  file { '/etc/sysconfig/spacewalk.answers':
-    ensure  => file,
-    content => template('spacewalk/answer-file.txt.erb'),
-  }
-
-  exec { 'spacewalk-setup':
-    command     => '/usr/bin/spacewalk-setup --disconnected --answer-file=/etc/sysconfig/spacewalk.answers',
-    creates     => '/usr/share/spacewalk',
-    refreshonly => true,
-  }
-
-  exec { 'enable-spacewalk-service':
-    command     => '/sbin/spacewalk-service enable',
-    refreshonly => true,
-  }
-
-  exec { 'start-spacewalk-service':
-    command     => '/sbin/spacewalk-service start',
-    refreshonly => true,
-  }
-
-  File['/etc/sysconfig']
-  ->
-  File['/etc/sysconfig/spacewalk.answers']
-  ->
-  Package[$package_list]
+  Class['spacewalk::server::packages']
   ~>
-  Exec['spacewalk-setup']
+  Class['spacewalk::server::setup']
   ~>
-  Exec['enable-spacewalk-service']
-  ~>
-  Exec['start-spacewalk-service']
+  Class['spacewalk::server::service']
 }

@@ -8,8 +8,9 @@ class spacewalk::params {
     fail("module not supported for operatingsystemmajrelease ${::operatingsystemmajrelease}")
   }
 
-  $manage_repo         = true
+  $manage_repos        = false
   $repo_stage          = 'pre'
+  $db_backend          = 'postgresql'
   $package_list        = [
     'spacewalk-setup-postgresql',
     'spacewalk-postgresql',
