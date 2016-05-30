@@ -12,6 +12,7 @@ class spacewalk::server (
   $ssl_set_email       = $spacewalk::params::ssl_set_email,
   $ssl_config_sslvhost = $spacewalk::params::ssl_config_sslvhost,
   $db_password         = $spacewalk::params::db_password,
+  $db_port             = $spacewalk::params::db_port,
 ) inherits spacewalk::params {
 
   validate_bool($manage_repos)
@@ -25,6 +26,7 @@ class spacewalk::server (
     }
   }
   validate_array($package_list)
+  validate_re($db_port, '^\d+$')
 
   include spacewalk::server::packages
   include spacewalk::server::setup

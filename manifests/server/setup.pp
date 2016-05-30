@@ -9,6 +9,7 @@ class spacewalk::server::setup (
   $ssl_set_email       = $spacewalk::params::ssl_set_email,
   $ssl_config_sslvhost = $spacewalk::params::ssl_config_sslvhost,
   $db_password         = $spacewalk::params::db_password,
+  $db_port             = $spacewalk::params::db_port,
 ) {
 
   file { '/etc/sysconfig':
@@ -31,5 +32,4 @@ class spacewalk::server::setup (
   File['/etc/sysconfig/spacewalk.answers']
   ->
   Exec['spacewalk-setup']
-
 }
