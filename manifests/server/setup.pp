@@ -1,15 +1,16 @@
 class spacewalk::server::setup (
-  $db_backend          = $spacewalk::params::db_backend,
-  $admin_email         = $spacewalk::params::admin_email,
-  $ssl_set_org         = $spacewalk::params::ssl_set_org,
-  $ssl_set_org_unit    = $spacewalk::params::ssl_set_org_unit,
-  $ssl_set_state       = $spacewalk::params::ssl_set_state,
-  $ssl_set_country     = $spacewalk::params::ssl_set_country,
-  $ssl_password        = $spacewalk::params::ssl_password,
-  $ssl_set_email       = $spacewalk::params::ssl_set_email,
-  $ssl_config_sslvhost = $spacewalk::params::ssl_config_sslvhost,
-  $db_password         = $spacewalk::params::db_password,
-  $db_port             = $spacewalk::params::db_port,
+  $db_backend          = $spacewalk::server::db_backend,
+  $admin_email         = $spacewalk::server::admin_email,
+  $ssl_set_org         = $spacewalk::server::ssl_set_org,
+  $ssl_set_org_unit    = $spacewalk::server::ssl_set_org_unit,
+  $ssl_set_city        = $spacewalk::server::ssl_set_city,
+  $ssl_set_state       = $spacewalk::server::ssl_set_state,
+  $ssl_set_country     = $spacewalk::server::ssl_set_country,
+  $ssl_password        = $spacewalk::server::ssl_password,
+  $ssl_set_email       = $spacewalk::server::ssl_set_email,
+  $ssl_config_sslvhost = $spacewalk::server::ssl_config_sslvhost,
+  $db_password         = $spacewalk::server::db_password,
+  $db_port             = $spacewalk::server::db_port,
 ) {
 
   file { '/etc/sysconfig':
@@ -32,4 +33,5 @@ class spacewalk::server::setup (
   File['/etc/sysconfig/spacewalk.answers']
   ->
   Exec['spacewalk-setup']
+
 }

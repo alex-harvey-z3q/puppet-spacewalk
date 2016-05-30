@@ -4,6 +4,7 @@ class spacewalk::server (
   $db_backend          = $spacewalk::params::db_backend,
   $package_list        = $spacewalk::params::package_list,
   $admin_email         = $spacewalk::params::admin_email,
+  $ssl_set_city        = $spacewalk::params::ssl_set_city,
   $ssl_set_org         = $spacewalk::params::ssl_set_org,
   $ssl_set_org_unit    = $spacewalk::params::ssl_set_org_unit,
   $ssl_set_state       = $spacewalk::params::ssl_set_state,
