@@ -19,7 +19,7 @@ class spacewalk::server::setup (
 
   file { '/etc/sysconfig/spacewalk.answers':
     ensure  => file,
-    content => template('spacewalk/answer-file.txt.erb'),
+    content => template('spacewalk/spacewalk.answers.erb'),
   }
 
   exec { 'spacewalk-setup':
